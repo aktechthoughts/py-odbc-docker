@@ -1,0 +1,34 @@
+#Use this to Create pyodbc docker image
+---
+- hosts: localhost
+  vars_files:
+    - ./vars/mssql.yml
+    - ./vars/global.yml
+
+  tasks:
+
+    - name: Add host
+      lineinfile: 
+        path: drivers/freetds.conf
+        regexp: '^host.*'
+        line: host = {{ host }}
+
+    - name: Add port
+      lineinfile: 
+        path: drivers/odbc.ini
+        regexp: '^port.*'
+        line: port = {{ port }}
+
+    - name: Add Database
+      lineinfile: 
+        path: drivers/odbc.ini
+        regexp: '^Database.*'
+        line: Database = {{ Database }}
+
+
+    - name: Build Image
+      shell: |
+        docker rmi $(docker images | grep '<none>' | awk '{ print $3 }') --force > /dev/null 2>&1
+        docker build . -t "{{ default_image_name }}"
+        
+    
