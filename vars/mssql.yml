@@ -3,4 +3,4 @@
 ServerName : sql_server
 host : mssql-test.cyqas5b0owfs.eu-central-1.rds.amazonaws.com
 port : 1433
-Database : master
+Database : tempdb
