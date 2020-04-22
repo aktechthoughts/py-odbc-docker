@@ -3,11 +3,12 @@
 - hosts: localhost
   vars_files:
     - ./vars/mssql.yml
+    - ./vars/mysql.yml
     - ./vars/global.yml
 
   tasks:
 
-    - name: Add host
+    - name: Add host 
       lineinfile: 
         path: drivers/freetds.conf
         regexp: '^host.*'

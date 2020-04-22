@@ -1,6 +1,6 @@
 # MS SQL Server Specific config
 
 
-host : analyticsportal-dev.cjgyin6ppjdg.ap-south-1.rds.amazonaws.com
+host : mssql-test.cyqas5b0owfs.eu-central-1.rds.amazonaws.com
 port : 1433
-Database : Adidas_dna
+Database : master
