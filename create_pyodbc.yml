@@ -24,10 +24,6 @@
               tds version = 8.0
               host = {{ mssql.host }}
 
-              [{{ mysql.ServerName }}]
-              tds version = 8.0
-              host = {{ mysql.host }}              
-
    - name: Add host  odbc.ini
      blockinfile:               
       path: drivers/odbc.ini
@@ -43,8 +39,7 @@
              [mysql]
              Description = MY SQL Server
              Driver = MySQL
-             TDS_Version = 8.0
-             ServerName = {{ mysql.ServerName }}
+             Server = {{ mysql.host }}
              Database = {{ mysql.Database }}
              port = {{ mysql.port }}             
 
