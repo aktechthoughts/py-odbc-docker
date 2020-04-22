@@ -28,7 +28,7 @@ COPY drivers/mysql-connector-odbc-5.3.10-linux-ubuntu16.04-x86-64bit.tar.gz /tmp
 WORKDIR /tmp
 RUN tar xvzf /tmp/mysql-connector-odbc-5.3.10-linux-ubuntu16.04-x86-64bit.tar.gz  \
     &&  cp /tmp/mysql-connector-odbc-5.3.10-linux-ubuntu16.04-x86-64bit/lib/libmyodbc5* /usr/lib/x86_64-linux-gnu/odbc/ \
-    &&    ./tmp/mysql-connector-odbc-5.3.10-linux-ubuntu16.04-x86-64bit/bin/myodbc-installer -d -a -n "MySQL" -t "DRIVER=/usr/lib/x86_64-linux-gnu/odbc/libmyodbc5w.so;"
+    &&    ./mysql-connector-odbc-5.3.10-linux-ubuntu16.04-x86-64bit/bin/myodbc-installer -d -a -n "MySQL" -t "DRIVER=/usr/lib/x86_64-linux-gnu/odbc/libmyodbc5w.so;"
 
 # Oracle 18.5
 COPY drivers/oracle-instantclient18.5-basic-18.5.0.0.0-3.x86_64.rpm /tmp
