@@ -27,7 +27,7 @@ COPY drivers/mysql-connector-odbc-5.3.10-linux-ubuntu16.04-x86-64bit.tar.gz /tmp
 # MySQL ODBC Ansi driver
 WORKDIR /tmp
 RUN tar xvzf /tmp/mysql-connector-odbc-5.3.10-linux-ubuntu16.04-x86-64bit.tar.gz  \
-    && ./mysql-connector-odbc-5.3.10-linux-ubuntu16.04-x86-64bit/bin/myodbc-installer -d -a -n "MySQL ODBC 5.3 Ansi Driver" \
+    && ./mysql-connector-odbc-5.3.10-linux-ubuntu16.04-x86-64bit/bin/myodbc-installer -d -a -n "MySQL" \
         -t "DRIVER=/usr/src/app/mysql-connector-odbc-5.3.10-linux-ubuntu16.04-x86-64bit/lib/libmyodbc5a.so"
 
 # Oracle 18.5
@@ -44,7 +44,7 @@ ENV LD_LIBRARY_PATH /usr/lib/oracle/18.5/client64/lib/${LD_LIBRARY_PATH:+:$LD_LI
 # 3. Make sure links are set
 RUN ldconfig
 # 4. Use the myodbc-installer to install the driver
-RUN ./mysql-connector-odbc-5.3.10-linux-ubuntu16.04-x86-64bit/bin/myodbc-installer -d -a -n "Oracle 18.5" -t "DRIVER=/usr/lib/oracle/18.5/client64/lib/libsqora.so.18.5"
+RUN ./mysql-connector-odbc-5.3.10-linux-ubuntu16.04-x86-64bit/bin/myodbc-installer -d -a -n "Oracle" -t "DRIVER=/usr/lib/oracle/18.5/client64/lib/libsqora.so.18.5"
 
 
 # install pyodbc (and, optionally, sqlalchemy)

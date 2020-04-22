@@ -42,7 +42,7 @@
 
              [mysql]
              Description = MY SQL Server
-             Driver = FreeTDS
+             Driver = MySQL
              TDS_Version = 8.0
              ServerName = {{ mysql.ServerName }}
              Database = {{ mysql.Database }}
