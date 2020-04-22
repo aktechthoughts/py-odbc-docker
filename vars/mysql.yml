@@ -1,6 +1,6 @@
-# MYSQL Server Specific config
+# MS SQL Server Specific config
 
-
-host : <>
-port : <>
-Database : <>
+ServerName : mysql_server
+host : mysql-test.cyqas5b0owfs.eu-central-1.rds.amazonaws.com
+port : 3306
+Database : mysqltest
