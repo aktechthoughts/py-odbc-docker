@@ -51,6 +51,7 @@ RUN ./mysql-connector-odbc-5.3.10-linux-ubuntu16.04-x86-64bit/bin/myodbc-install
 RUN pip install --trusted-host pypi.python.org pyodbc==4.0.26 sqlalchemy==1.3.5
 
 RUN mkdir /app
-ADD app.py /app
+ADD mysql_app.py /app
+ADD mssql_app.py /app
 
 WORKDIR /app
