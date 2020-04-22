@@ -2,34 +2,55 @@
 ---
 - hosts: localhost
   vars_files:
-    - ./vars/mssql.yml
-    - ./vars/mysql.yml
     - ./vars/global.yml
-
   tasks:
 
-    - name: Add host 
-      lineinfile: 
-        path: drivers/freetds.conf
-        regexp: '^host.*'
-        line: host = {{ host }}
+   - name: Include vars of stuff.yaml into the 'stuff' variable (2.2).
+     include_vars:
+      file: ./vars/mssql.yml
+      name: mssql
 
-    - name: Add port
-      lineinfile: 
-        path: drivers/odbc.ini
-        regexp: '^port.*'
-        line: port = {{ port }}
+   - name: Include vars of stuff.yaml into the 'stuff' variable (2.2).
+     include_vars:
+      file: ./vars/mysql.yml
+      name: mysql
 
-    - name: Add Database
-      lineinfile: 
-        path: drivers/odbc.ini
-        regexp: '^Database.*'
-        line: Database = {{ Database }}
+   - name: Add freetds.conf
+     blockinfile: 
+      path: drivers/freetds.conf
+      insertafter: EOF
+      block: |
+              [{{ mssql.ServerName }}]
+              tds version = 8.0
+              host = {{ mssql.host }}
 
+              [{{ mysql.ServerName }}]
+              tds version = 8.0
+              host = {{ mysql.host }}              
 
-    - name: Build Image
-      shell: |
-        docker rmi $(docker images | grep '<none>' | awk '{ print $3 }') --force > /dev/null 2>&1
-        docker build . -t "{{ default_image_name }}"
+   - name: Add host  odbc.ini
+     blockinfile:               
+      path: drivers/odbc.ini
+      block: |
+             [mssql]
+             Description = MS SQL Server
+             Driver = FreeTDS
+             TDS_Version = 8.0
+             ServerName = {{ mssql.ServerName }}
+             Database = {{ mssql.Database }}
+             port = {{ mssql.port }}
+
+             [mysql]
+             Description = MY SQL Server
+             Driver = FreeTDS
+             TDS_Version = 8.0
+             ServerName = {{ mysql.ServerName }}
+             Database = {{ mysql.Database }}
+             port = {{ mysql.port }}             
+
+   - name: Build Image
+     shell: |
+      docker rmi $(docker images | grep '<none>' | awk '{ print $3 }') --force > /dev/null 2>&1
+      docker build . -t "{{ default_image_name }}"
         
     
